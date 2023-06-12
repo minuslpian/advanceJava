@@ -1,0 +1,58 @@
+package pojos;
+
+import java.time.LocalDate;
+
+import javax.persistence.*;
+
+import lombok.*;
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@Table(name = "course")
+public class Course extends BaseEntity {
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "course_title")
+	private CourseTitle title;
+	@Column(name = "start_date")
+	private LocalDate sdate;
+	@Column(name = "end_date")
+	private LocalDate edate;
+	@Column(name = "fees")
+	private double fees;
+	@Column(name = "min_score")
+	private int minScore;
+
+}
+
+
+package pojos;
+
+public enum CourseTitle {
+	DAC,DITIS,DBDA,EMBED
+}
+
+
+package pojos;
+
+import javax.persistence.*;
+
+
+@MappedSuperclass // to tell hib , not to create any tables n other entities will extend from it
+public class BaseEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+}
+
